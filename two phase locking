@@ -1,0 +1,32 @@
+In this question, you have to write a C program to implement two phase locking. [5 marks]
+Let, there are 6 transactions, T1, T2, T3, T4, T5, and T6, respectively. Let, there are 5 data items A,
+B, C, D, and E, respectively.
+T1 needs data items A, B, C to be accessed in its lifetime.
+T2 needs data items A, B, C, D, E to be accessed in its lifetime.
+T3 needs data items B, C, D, E to be accessed in its lifetime.
+T4 needs data items A, B, C, D to be accessed in its lifetime.
+T5 needs data items A, B, C, D, E to be accessed in its lifetime.
+T6 needs data item A to be accessed in its lifetime.
+Use overflow chaining hashing technique to implement a lock table to keep track of
+locking/unlocking on data items as discussed in Section 16.1.4 of the book by
+Silberschatz−Korth−Sudarshan. The program should also be able to detect deadlock. The program
+should also take care of growing and shrinking phase of each transaction.
+(a) In the output terminal if we enter the string as:
+“Request for shared lock on A by T1”
+then if there is no lock on A or shared locked by some other transaction or transaction is in its
+growing phase then output should be
+“ Request granted”
+The lock table should be updated accordingly.
+If there is already an exclusive lock on A by some other transaction then output should be
+“Request not granted. Transactions T2, T3 etc. are already waiting for A.”
+(b) In the output terminal if we enter the string as:
+“Unlock A by transaction T1”.
+It will first check that whether the transaction is in shrinking phase or not. If not then output should
+be,
+“Not possible to unlock as transaction is not in shrinking phase”.
+For transaction T1, shrinking phase will start when its all required data items viz., A, B, C are
+locked.
+If the transaction is in shrinking phase then it will free the data item A in the lock table and will
+assign it to the transaction which is on the top of the waiting list.
+Similar to above input strings any number of such relevant input strings can be entered and the
+output should be shown accordingly.
